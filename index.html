@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>LMP Stock Inventory</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f0f2f5;
+    }
+    #loading {
+      position: fixed;
+      inset: 0;
+      background: #2563eb;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      font-size: 1.4rem;
+      text-align: center;
+      padding: 20px;
+    }
+    #frame {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: none;
+    }
+    header {
+      background: #2563eb;
+      color: white;
+      text-align: center;
+      padding: 14px;
+      font-weight: 600;
+      font-size: 1.2rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+  </style>
+</head>
+<body>
+
+  <header>LMP Stock Inventory</header>
+
+  <div id="loading">
+    Loading your inventory system...<br>
+    <small style="font-size:0.9rem; margin-top:12px; opacity:0.9;">
+      Please wait a moment
+    </small>
+  </div>
+
+  <!-- === PASTE YOUR REAL GOOGLE APPS SCRIPT /exec URL HERE === -->
+  <iframe id="frame" 
+          src="https://script.google.com/macros/s/AKfycbwXY-49gTZukH_JPkqqP4_3RX20YofvD8UuzVBLt9UUHYPdi2-RhTrMtrQMoYCHq7oAxw/exec"
+          frameborder="0"
+          allowfullscreen>
+  </iframe>
+
+  <script>
+    const frame = document.getElementById('frame');
+    const loading = document.getElementById('loading');
+
+    frame.onload = function() {
+      loading.style.display = 'none';
+      frame.style.display = 'block';
+    };
+
+    setTimeout(() => {
+      if (loading.style.display !== 'none') {
+        loading.innerHTML = '<div style="text-align:center;padding:20px;">Loading is taking too long.<br>Please check your internet connection or try again later.</div>';
+      }
+    }, 15000);
+  </script>
+
+</body>
+</html>
