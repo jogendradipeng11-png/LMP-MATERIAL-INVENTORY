@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAP ERP - Enterprise Warehouse & Low/High Stock Thresholds</title>
+    <title>SAP ERP - Enterprise Warehouse & Strictly Deduplicated Master</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Alpine.js -->
@@ -46,7 +46,7 @@
                     <i class="fa-solid fa-cubes"></i> SAP S/4HANA ERP
                 </div>
                 <div>
-                    <h1 class="text-lg font-semibold tracking-wide text-white">Plant 1870 - Low & High Stock Threshold Alerts</h1>
+                    <h1 class="text-lg font-semibold tracking-wide text-white">Plant 1870 - Strictly Deduplicated Material Master</h1>
                     <p class="text-xs text-slate-400">Firebase Cloud Sync: <span :class="firebaseConnected ? 'text-emerald-400 font-bold' : 'text-amber-400'" x-text="firebaseStatus"></span></p>
                 </div>
             </div>
@@ -100,7 +100,7 @@
                         <div class="bg-sap-card border border-slate-700 p-4 rounded-lg shadow">
                             <span class="text-slate-400 text-xs font-semibold uppercase">Total Tracked Items</span>
                             <h2 class="text-2xl font-bold mt-2" x-text="totalItemsCount"></h2>
-                            <p class="text-xs text-emerald-400 mt-1"><i class="fa-solid fa-arrow-up"></i> All Warehouses Loaded</p>
+                            <p class="text-xs text-emerald-400 mt-1"><i class="fa-solid fa-arrow-up"></i> Strictly Deduplicated</p>
                         </div>
                         <div class="bg-sap-card border border-slate-700 p-4 rounded-lg shadow">
                             <span class="text-slate-400 text-xs font-semibold uppercase">Low Stock Alerts</span>
@@ -162,7 +162,7 @@
                         </div>
                     </div>
 
-                    <!-- Inventory Table with Low/High Stock Thresholds -->
+                    <!-- Inventory Table -->
                     <div class="bg-sap-card border border-slate-700 rounded-lg shadow overflow-hidden">
                         <div class="overflow-x-auto max-h-[600px]">
                             <table class="w-full text-left border-collapse text-sm">
@@ -262,7 +262,7 @@
                             <h3 class="text-md font-semibold text-white flex items-center gap-2">
                                 <i class="fa-solid fa-file-excel text-emerald-400"></i> Sheet-Wise Multi-Store Export (.xlsx)
                             </h3>
-                            <p class="text-sm text-slate-400">Download complete deduplicated workbook where each warehouse is exported into its own dedicated sheet including Low & High stock thresholds.</p>
+                            <p class="text-sm text-slate-400">Download complete deduplicated workbook where each warehouse is exported into its own dedicated sheet.</p>
                             <div class="pt-2">
                                 <button @click="exportAllSheetsExcel()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-5 py-2.5 rounded text-xs font-semibold flex items-center gap-2 shadow">
                                     <i class="fa-solid fa-file-excel"></i> Export All Sheets Workbook (.xlsx)
@@ -274,7 +274,7 @@
                             <h3 class="text-md font-semibold text-white flex items-center gap-2">
                                 <i class="fa-solid fa-file-arrow-up text-amber-400"></i> Sheet-Wise Import (Excel / CSV)
                             </h3>
-                            <p class="text-sm text-slate-400">Upload multi-sheet Excel file to update store inventories, low/high thresholds, and SAP numbers in real-time.</p>
+                            <p class="text-sm text-slate-400">Upload multi-sheet Excel file to update store inventories in real-time.</p>
                             <div>
                                 <input type="file" @change="handleSheetWiseUpload($event)" accept=".xlsx, .xls, .csv" class="block w-full text-xs text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-sap-blue file:text-white hover:file:bg-blue-600 cursor-pointer">
                             </div>
@@ -359,11 +359,11 @@
                 txDate: new Date().toISOString().slice(0,10),
                 txRemarks: '',
                 inventory: [
-                    { id: 'item_1', store: 'MATERIAL DATA', slNo: 1, description: 'BUTTER FLY VALVE 4"WECO AND CHINA', sapNumber: '1293658', partNo: '3229886', unit: 'PCS', lastMonthStock: 25, stock: 13, minStock: 5, maxStock: 50, updatedDate: '2026-08-17' },
-                    { id: 'item_2', store: 'MATERIAL DATA', slNo: 2, description: 'BUTTER FLY VALVE 2"', sapNumber: '1293670', partNo: 'N/A', unit: 'PCS', lastMonthStock: 4, stock: 4, minStock: 2, maxStock: 20, updatedDate: '2026-08-17' },
-                    { id: 'item_3', store: 'TOOLS', slNo: 1, description: 'IRON BAR BIG', sapNumber: 'N/A', partNo: 'N/A', unit: 'PCS', lastMonthStock: 1, stock: 1, minStock: 1, maxStock: 10, updatedDate: '2026-08-17' },
-                    { id: 'item_4', store: 'ELECTRICAL ITEM', slNo: 1, description: 'ELECTRICAL MOTOR 10 HP TOSHIBA', sapNumber: 'N/A', partNo: 'XP10133650', unit: 'PCS', lastMonthStock: 1, stock: 1, minStock: 1, maxStock: 5, updatedDate: '2026-08-17' },
-                    { id: 'item_5', store: 'BARIOD STORE', slNo: 1, description: 'HOSE 4" BLUE COLOUR', sapNumber: 'N/A', partNo: 'N/A', unit: 'ROLL', lastMonthStock: 12, stock: 12, minStock: 3, maxStock: 30, updatedDate: '2026-08-17' }
+                    { id: 'item_1', store: 'MATERIAL DATA', slNo: 1, description: 'BUTTER FLY VALVE 4"WECO AND CHINA', sapNumber: '1293658', unit: 'PCS', lastMonthStock: 25, stock: 13, minStock: 5, maxStock: 50, updatedDate: '2026-08-17' },
+                    { id: 'item_2', store: 'MATERIAL DATA', slNo: 2, description: 'BUTTER FLY VALVE 2"', sapNumber: '1293670', unit: 'PCS', lastMonthStock: 4, stock: 4, minStock: 2, maxStock: 20, updatedDate: '2026-08-17' },
+                    { id: 'item_3', store: 'TOOLS', slNo: 1, description: 'IRON BAR BIG', sapNumber: 'N/A', unit: 'PCS', lastMonthStock: 1, stock: 1, minStock: 1, maxStock: 10, updatedDate: '2026-08-17' },
+                    { id: 'item_4', store: 'ELECTRICAL ITEM', slNo: 1, description: 'ELECTRICAL MOTOR 10 HP TOSHIBA', sapNumber: 'N/A', unit: 'PCS', lastMonthStock: 1, stock: 1, minStock: 1, maxStock: 5, updatedDate: '2026-08-17' },
+                    { id: 'item_5', store: 'BARIOD STORE', slNo: 1, description: 'HOSE 4" BLUE COLOUR', sapNumber: 'N/A', unit: 'ROLL', lastMonthStock: 12, stock: 12, minStock: 3, maxStock: 30, updatedDate: '2026-08-17' }
                 ],
                 transactions: [
                     { timestamp: '2026-08-17 08:30', type: 'PURCHASE', store: 'MATERIAL DATA', description: 'BUTTER FLY VALVE 4"WECO AND CHINA', qty: 5, remarks: 'PO #8841 Received' },
@@ -378,8 +378,7 @@
                     return this.inventory.filter(item => {
                         const matchesSearch = item.description.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
                                               item.sapNumber.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-                                              item.unit.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-                                              item.partNo.toLowerCase().includes(this.searchQuery.toLowerCase());
+                                              item.unit.toLowerCase().includes(this.searchQuery.toLowerCase());
                         const matchesStore = this.selectedStore === 'all' || item.store === this.selectedStore;
                         return matchesSearch && matchesStore;
                     });
@@ -480,7 +479,6 @@
                             "SL NO": i.slNo,
                             "MATERIAL DESCRIPTION": i.description,
                             "SAP Number": i.sapNumber,
-                            "PART NO": i.partNo,
                             "UNIT": i.unit,
                             "LAST MONTH STOCK": i.lastMonthStock,
                             "CURRENT STOCK": i.stock,
@@ -495,7 +493,7 @@
                     const txWs = XLSX.utils.json_to_sheet(this.transactions);
                     XLSX.utils.book_append_sheet(wb, txWs, "Audit Trail");
 
-                    XLSX.writeFile(wb, "Plant_1870_Inventory_Thresholds.xlsx");
+                    XLSX.writeFile(wb, "Plant_1870_Deduplicated_Thresholds.xlsx");
                 },
 
                 exportTransactionsExcel() {
@@ -513,27 +511,31 @@
                         const data = new Uint8Array(e.target.result);
                         const workbook = XLSX.read(data, { type: 'array' });
                         let loadedItems = [];
+                        let uniqueCheck = new Set();
 
                         workbook.SheetNames.forEach(sheetName => {
                             if (sheetName !== 'Audit Trail' && sheetName !== 'REQUESTED BY HAMAD AND MARAT' && sheetName !== 'MARAT REQUESTED NOV 9') {
                                 const rows = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName]);
                                 rows.forEach((r, idx) => {
                                     const desc = String(r['MATERIAL DESCRIPTION'] || r.description || r.Description || '').trim().toUpperCase();
-                                    if (desc && desc !== 'NAN' && !desc.startsWith('SL NO')) {
-                                        loadedItems.push({
-                                            id: 'imported_' + sheetName + '_' + idx,
-                                            store: sheetName.toUpperCase(),
-                                            slNo: r['SL NO'] || r.slNo || (idx + 1),
-                                            description: desc,
-                                            sapNumber: String(r['SAP Number'] || r.sapNumber || r['Tracking number(HALLIBURTON)'] || 'N/A'),
-                                            partNo: String(r['PART NO'] || r.partNo || 'N/A'),
-                                            unit: String(r['UNIT'] || r.unit || r['Unnamed: 6'] || 'PCS').toUpperCase(),
-                                            lastMonthStock: Number(r['LAST MONTH STOCK'] || r.lastMonthStock || r['PREVIOUS STOCK'] || 0),
-                                            stock: Number(r['CURRENT STOCK'] || r.stock || r['FINAL STOCK'] || 0),
-                                            minStock: Number(r['LOW STOCK (MIN)'] || r.minStock || 2),
-                                            maxStock: Number(r['HIGH STOCK (MAX)'] || r.maxStock || 100),
-                                            updatedDate: new Date().toISOString().slice(0,10)
-                                        });
+                                    if (desc && desc !== 'NAN' && !desc.startsWith('SL NO') && !desc.isdigit() && desc.length > 1) {
+                                        const uniqueKey = sheetName.toUpperCase() + '|' + desc;
+                                        if (!uniqueCheck.has(uniqueKey)) {
+                                            uniqueCheck.add(uniqueKey);
+                                            loadedItems.push({
+                                                id: 'imported_' + sheetName + '_' + idx,
+                                                store: sheetName.toUpperCase(),
+                                                slNo: loadedItems.length + 1,
+                                                description: desc,
+                                                sapNumber: String(r['SAP Number'] || r.sapNumber || r['Tracking number(HALLIBURTON)'] || 'N/A'),
+                                                unit: String(r['UNIT'] || r.unit || r['Unnamed: 6'] || 'PCS').toUpperCase(),
+                                                lastMonthStock: Number(r['LAST MONTH STOCK'] || r.lastMonthStock || r['PREVIOUS STOCK'] || 0),
+                                                stock: Number(r['CURRENT STOCK'] || r.stock || r['FINAL STOCK'] || 0),
+                                                minStock: Number(r['LOW STOCK (MIN)'] || r.minStock || 2),
+                                                maxStock: Number(r['HIGH STOCK (MAX)'] || r.maxStock || 100),
+                                                updatedDate: new Date().toISOString().slice(0,10)
+                                            });
+                                        }
                                     }
                                 });
                             }
@@ -542,7 +544,7 @@
                         if (loadedItems.length > 0) {
                             this.inventory = loadedItems;
                             this.syncToFirebase();
-                            alert(`Successfully imported and updated ${this.inventory.length} items with thresholds from ${file.name}!`);
+                            alert(`Successfully imported and strictly deduplicated ${this.inventory.length} items from ${file.name}!`);
                         }
                     };
                     reader.readAsArrayBuffer(file);
@@ -577,7 +579,7 @@
                                 labels: ['Material Data', 'Tools', 'Electrical', 'Store 1', 'Store 2', 'Bariod', 'Mechanic'],
                                 datasets: [{
                                     label: 'Items Registered',
-                                    data: [381, 55, 104, 147, 22, 499, 69],
+                                    data: [254, 33, 69, 3, 21, 31, 62],
                                     backgroundColor: '#0a6ed1'
                                 }]
                             },
@@ -598,7 +600,7 @@
                             data: {
                                 labels: ['In Stock', 'Low Stock', 'Out of Stock'],
                                 datasets: [{
-                                    data: [1200, 150, 68],
+                                    data: [320, 95, 39],
                                     backgroundColor: ['#10b981', '#f59e0b', '#ef4444']
                                 }]
                             },
